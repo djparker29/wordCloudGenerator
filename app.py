@@ -1,51 +1,48 @@
 # app.py
-from flask import Flask, request, jsonify
-app = Flask(__name__)
+from flask import Flask, render_template, send_from_directory, request, jsonify, make_response
+from flask_cors import CORS, cross_origin
+import os
 
-@app.route('/getmsg/', methods=['GET'])
-def respond():
-    # Retrieve the name from url parameter
-    name = request.args.get("name", None)
+app = Flask(__name__, static_folder='client/build', static_url_path='')
+cors = CORS(app)
 
-    # For debugging
-    print(f"got name {name}")
+@app.route('/api')
+@cross_origin()
+def Welcome():
+    return "Welcome to the API!!!"
 
-    response = {}
 
-    # Check if user sent a name at all
-    if not name:
-        response["ERROR"] = "no name found, please send a name."
-    # Check if the user entered a number not a name
-    elif str(name).isdigit():
-        response["ERROR"] = "name can't be numeric."
-    # Now the user entered a valid name
-    else:
-        response["MESSAGE"] = f"Tanner, you rock!  Welcome to this sick python flask app!!"
+@app.route('/api/justpie/')
+@cross_origin()
+def GeneratePie():
+    # Get the input data (Wedge is the distance between slices)
+    data = request.args.get('data')
+    colors = request.args.get('colors')
+    wedge = request.args.get('wedge')
 
-    # Return the response in json format
-    return jsonify(response)
+    # Turn it into a list
+    data = [float(i) for i in data.split(',')]
+    colors = ['#'+i for i in colors.split(',')] # Adds # to beginning of string
+    
+    # Make a matplotlib (high res) pie chart!
+    fig1, ax1 = plt.subplots(figsize=(20,20))
+       patches, texts = ax1.pie(data,explode=[float(wedge) for w in
+       range(0,len(data))], colors = colors, startangle=90)
+    
+    # Equal aspect ratio ensures that pie is drawn as a circle
+    ax1.axis('equal')
+    plt.tight_layout()
+    
+    # Save the image temporary on the local machine
+    plt.savefig(os.getcwd() + '/test.png')
 
-@app.route('/post/', methods=['POST'])
-def post_something():
-    param = request.form.get('name')
-    print(param)
-    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
-    if param:
-        return jsonify({
-            "Message": f"Welcome {name} to our awesome platform!!",
-            # Add this option to distinct the POST request
-            "METHOD" : "POST"
-        })
-    else:
-        return jsonify({
-            "ERROR": "no name found, please send a name."
-        })
 
-# A welcome message to test our server
 @app.route('/')
-def index():
-    return "<h1>Tanner, you rock.  Welcome to this sick python flask app!!</h1>"
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
+
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+    app.run(threaded=True, port=3000)
+
