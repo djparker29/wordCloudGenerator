@@ -20,7 +20,7 @@ def respond():
         response["ERROR"] = "name can't be numeric."
     # Now the user entered a valid name
     else:
-        response["MESSAGE"] = f"Welcome {name} to our awesome platform!!"
+        response["MESSAGE"] = f"Tanner, you rock!  Welcome to this sick python flask app!!"
 
     # Return the response in json format
     return jsonify(response)
@@ -44,7 +44,7 @@ def post_something():
 # A welcome message to test our server
 @app.route('/')
 def index():
-    return "<h1>Welcome to our server !!</h1>"
+    return "<h1>Tanner, you rock.  Welcome to this sick python flask app!!</h1>"
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
