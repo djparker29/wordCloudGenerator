@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import os
@@ -22,7 +22,8 @@ def generateWordCloud():
 
     # Create and save the image to the current working directory
     image = wordcloud.to_image()
-    image.save(os.getcwd() + '/test.png')
+    image.show()
+    # image.save(os.getcwd() + '/test.png')
     
     """
 
@@ -44,7 +45,7 @@ def generateWordCloud():
 
 @app.route('/')
 def index():
-    return "<h1>Word Cloud Generator App!!</h1>"
+    return render_template("index.html")
 
 
 if __name__ == '__main__':
