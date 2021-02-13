@@ -1,48 +1,53 @@
 # app.py
-from flask import Flask, render_template, send_from_directory, request, jsonify, make_response
-from flask_cors import CORS, cross_origin
+from flask import Flask, request, jsonify
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 import os
 
-app = Flask(__name__, static_folder='client/build', static_url_path='')
-cors = CORS(app)
+app = Flask(__name__)
 
-@app.route('/api')
-@cross_origin()
-def Welcome():
+@app.route('/api/', methods=['GET'])
+def respond():
     return "Welcome to the API!!!"
 
 
-@app.route('/api/justpie/')
-@cross_origin()
-def GeneratePie():
+@app.route('/api/wordcloud/', methods=['GET'])
+def generateWordCloud():
     # Get the input data (Wedge is the distance between slices)
     data = request.args.get('data')
-    colors = request.args.get('colors')
-    wedge = request.args.get('wedge')
+    print(data)
 
-    # Turn it into a list
-    data = [float(i) for i in data.split(',')]
-    colors = ['#'+i for i in colors.split(',')] # Adds # to beginning of string
+    # Generate the word cloud object   
+    wordcloud = WordCloud().generate(str(data))
+
+    # Create and save the image to the current working directory
+    image = wordcloud.to_image()
+    image.save(os.getcwd() + '/test.png')
     
-    # Make a matplotlib (high res) pie chart!
-    fig1, ax1 = plt.subplots(figsize=(20,20))
-       patches, texts = ax1.pie(data,explode=[float(wedge) for w in
-       range(0,len(data))], colors = colors, startangle=90)
-    
-    # Equal aspect ratio ensures that pie is drawn as a circle
-    ax1.axis('equal')
-    plt.tight_layout()
-    
+    """
+
+    # Plot configurations
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis("off")
+
+    # Show the plot
+    plt.show()
+
     # Save the image temporary on the local machine
     plt.savefig(os.getcwd() + '/test.png')
 
+    """
+
+    response = {}
+    response["SUCCESS"] = f"Your word cloud was downloaded!!"
+    return jsonify(response)
 
 @app.route('/')
-def serve():
-    return send_from_directory(app.static_folder, 'index.html')
+def index():
+    return "<h1>Word Cloud Generator App!!</h1>"
 
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=3000)
+    app.run(threaded=True, port=5000)
 
