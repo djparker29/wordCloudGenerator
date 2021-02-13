@@ -10,7 +10,6 @@ kiwisolver==1.1.0
 MarkupSafe==1.1.1
 matplotlib==3.3.4
 nodeenv==1.5.0
-numpy==1.20.0rc1
 Pillow==8.1.0
 pyparsing==2.4.7
 python-dateutil==2.8.1
