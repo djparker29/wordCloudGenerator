@@ -2,7 +2,7 @@
 from flask import Flask, render_template, send_from_directory, request, jsonify, make_response
 from flask_cors import CORS, cross_origin
 from wordcloud import WordCloud
-import matplotlib.pyplot as plt, mpld3
+import matplotlib.pyplot as plt
 import os
 
 app = Flask(__name__, static_folder='client/build', static_url_path='')
@@ -62,7 +62,7 @@ def generateWordCloud():
     plt.axis("off")
 
     # Show the plot
-    mpld3.show()
+    # mpld3.show()
 
     # Save the image temporary on the local machine
     # plt.savefig(os.getcwd() + '/test.png')
