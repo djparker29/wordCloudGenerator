@@ -29,11 +29,13 @@ def generatePie():
     else:
       data = request.args.get('data')
       colors = request.args.get('colors')
-      request.args.get('wedge')
+      wedge = request.args.get('wedge')
             
     # Turn it into a list
       data = [float(i) for i in data.split(',')]
       colors = ['#'+i for i in colors.split(',')]
+      print(data)
+      print(colors)
 
     # Make a matplotlib pie chart
       fig1, ax1 = plt.subplots(figsize=(20, 20))

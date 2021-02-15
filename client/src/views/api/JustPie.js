@@ -41,26 +41,18 @@ const JustPie = () => {
  // const [downloadLink, setDownloadLink] = useState("");
   const [data, setData] = useState("10,25,40,25");
   const [colors, setColors] = useState("#41B883,#E46651,#00D8FF,#DD1B16");
-  const [wedge, setWedge] = useState("0.05");
+  const [wedge, setWedge] = useState(0.05);
   // const apiBaseUrl = 'https://wordcloudme.herokuapp.com/api/justpie/'
-  const apiBaseUrl = 'http://localhost:5000/api/JustPie/'
+  const apiBaseUrl = 'http://localhost:5000/#/api/JustPie/'
 
-  /* function fetchData () {
-    setDownloadLink = '';
+  function fetchData () {
     let urlRequestString = apiBaseUrl + 
                           '?data=' + data + 
                           '&colors=' + colors + 
-                          '&wedge=' + wedge
-    fetch(urlRequestString).then(res => res.json()).then(
-      (result) => {
-        setDownloadLink(result.message);
-      },
-
-      (error) => {
-        console.log(error);
-      }
-    );
-  }; */
+                          '&wedge=' + wedge;
+    console.log(urlRequestString);
+    fetch(urlRequestString);
+  };
 
   return (
     <>
@@ -120,7 +112,7 @@ const JustPie = () => {
                   </CCol>
                 </CFormGroup>
               </CForm>
-              <CButton type="submit" color="primary">Generate Plot</CButton>
+              <CButton type="submit" color="primary" onClick={() => fetchData()}>Generate Plot</CButton>
             </CCardBody>
           </CCard>
         </CCol>

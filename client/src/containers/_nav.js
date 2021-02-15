@@ -20,7 +20,7 @@ const _nav =  [
     _tag: 'CSidebarNavItem',
     name: 'WordClouds',
     to: '/api/WordCloud',
-    icon: 'cil-chart-pie',
+    icon: 'cil-cloud-download',
     badge: {
       color: 'info',
       text: 'NEW',
