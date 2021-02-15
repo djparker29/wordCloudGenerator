@@ -38,13 +38,14 @@ import CIcon from '@coreui/icons-react'
 
 const JustPie = () => {
 
-  const [downloadLink, setDownloadLink] = useState("");
+ // const [downloadLink, setDownloadLink] = useState("");
   const [data, setData] = useState("10,25,40,25");
-  const [colors, setColors] = useState("#41B883',#E46651,#00D8FF,#DD1B16");
+  const [colors, setColors] = useState("#41B883,#E46651,#00D8FF,#DD1B16");
   const [wedge, setWedge] = useState("0.05");
-  const apiBaseUrl = 'https://wordcloudme.herokuapp.com/api/justpie/'
+  // const apiBaseUrl = 'https://wordcloudme.herokuapp.com/api/justpie/'
+  const apiBaseUrl = 'http://localhost:5000/api/JustPie/'
 
-  function fetchData () {
+  /* function fetchData () {
     setDownloadLink = '';
     let urlRequestString = apiBaseUrl + 
                           '?data=' + data + 
@@ -59,7 +60,7 @@ const JustPie = () => {
         console.log(error);
       }
     );
-  };
+  }; */
 
   return (
     <>
@@ -100,7 +101,7 @@ const JustPie = () => {
                       onChange={(event) => setColors(event.target.value)} 
                       required
                       />
-                    <CFormText>Enter your HEX codes, separated by a comma, without the # sign.</CFormText>
+                    <CFormText>Enter your HEX codes separated by a comma.</CFormText>
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
@@ -119,7 +120,7 @@ const JustPie = () => {
                   </CCol>
                 </CFormGroup>
               </CForm>
-              <CButton type="submit" color="primary" onClick={() => fetchData()}>Generate Plot</CButton>
+              <CButton type="submit" color="primary">Generate Plot</CButton>
             </CCardBody>
           </CCard>
         </CCol>
@@ -132,8 +133,13 @@ const JustPie = () => {
               <CChartPie
                 datasets={[
                   {
-                    backgroundColor: colors,
-                    data: data
+                    backgroundColor: [                  
+                      '#41B883',
+                      '#E46651',
+                      '#00D8FF',
+                      '#DD1B16'
+                    ],
+                    data: [40, 20, 80, 10]
                   }
                 ]}
                 labels={['VueJs', 'EmberJs', 'ReactJs', 'AngularJs']}
