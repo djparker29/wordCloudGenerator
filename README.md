@@ -5,6 +5,7 @@ The wordCloudMe takes text strings as inputs and generates cool word cloud image
 
 - Clone the `wordCloudGenerator` repo
 - `cd` to the `wordCloudGenerator` directory
+- Enter the virtual environment via `source venv/bin/activate`
 - Navigate to the `client` directory via `cd client`
 - Install node packages via `npm i`
 - Create the optimized build via `npm run build`
