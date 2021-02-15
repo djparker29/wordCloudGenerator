@@ -8,7 +8,7 @@ import os
 app = Flask(__name__, static_folder='client/build', static_url_path='')
 cors = CORS(app)
 
-@app.route('/api/', methods=['GET'])
+@app.route('/api/')
 @cross_origin()
 def respond():
     return "Welcome to the API!!!"
@@ -19,7 +19,7 @@ def respond():
 def generatePie():
     # Get the input data (Wedge is the distance between slices)
     data = request.args.get('data')
-    colors = request.arts.get('colors')
+    colors = request.args.get('colors')
     wedge = request.args.get('wedge')
         
     # Turn it into a list
@@ -41,7 +41,7 @@ def generatePie():
     plt.savefig(os.getcwd() + '/test.png')
 
 
-@app.route('/api/wordcloud/', methods=['GET'])
+@app.route('/api/wordcloud/')
 @cross_origin()
 def generateWordCloud():
     # Get the input data (Wedge is the distance between slices)
@@ -73,6 +73,7 @@ def generateWordCloud():
 
 
 @app.route('/')
+@cross_origin()
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 

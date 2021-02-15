@@ -9,7 +9,7 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'JustPie',
-    to: '/theme/colors',
+    to: '/api',
     icon: 'cil-chart-pie',
     badge: {
       color: 'info',
@@ -18,11 +18,11 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'WordCloud',
+    name: 'WordClouds',
     to: '/theme/colors',
     icon: 'cil-cloud',
     badge: {
-      color: 'secondary',
+      color: 'success',
       text: 'COMING SOON',
     },
   },

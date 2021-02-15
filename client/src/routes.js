@@ -37,9 +37,11 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
+const JustPie = React.lazy(() => import('./views/api/JustPie'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  { path: '/api', name: 'JustPie', component: JustPie },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
