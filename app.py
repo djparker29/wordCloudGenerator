@@ -50,8 +50,8 @@ def generatePie():
       plt.savefig(os.getcwd() + '/test.png')
 
     # User reached route via GET
-    else:
-      return redirect('/')
+  else:
+    return redirect('/')
 
 
 @app.route('/api/wordcloud/', methods=['GET', 'POST'])
